@@ -1,0 +1,71 @@
+{
+  "consumer": {
+    "name": "TodoWeb"
+  },
+  "provider": {
+    "name": "TodoApi"
+  },
+  "interactions": [
+    {
+      "description": "a request to list all todos",
+      "request": {
+        "method": "GET",
+        "path": "/todos"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+        },
+        "body": [
+          {
+            "id": 1,
+            "text": "Learn TDD"
+          }
+        ],
+        "matchingRules": {
+          "$.body": {
+            "min": 1
+          },
+          "$.body[*].*": {
+            "match": "type"
+          }
+        }
+      }
+    },
+    {
+      "description": "a request to add new todo",
+      "request": {
+        "method": "POST",
+        "path": "/todos",
+        "body": {
+          "text": "Learn TDD"
+        },
+        "matchingRules": {
+          "$.body": {
+            "match": "type"
+          }
+        }
+      },
+      "response": {
+        "status": 201,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "id": 1,
+          "text": "Learn TDD"
+        },
+        "matchingRules": {
+          "$.body": {
+            "match": "type"
+          }
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}
