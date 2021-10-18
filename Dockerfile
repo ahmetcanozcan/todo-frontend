@@ -12,5 +12,9 @@ COPY . .
 
 RUN npm run build
 
-EXPOSE 8080
-CMD [ "http-server", "dist" ]
+ARG PORT=8081
+ENV PORT=$PORT
+
+EXPOSE $PORT
+
+CMD [ "sh", "-c", "http-server", "dist", "-p", "${PORT}"]
