@@ -10,6 +10,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Create .env file
+        run : |
+          touch .env
+          echo VUE_APP_API_HOST=${{secrets.API_HOST}} >> .env
+          echo VUE_APP_API_PORT=${{secrets.API_PORT}} >> .env
+          cat .env
       - name: Install Node
         uses: actions/setup-node@v2
       - name: Install Dependencies

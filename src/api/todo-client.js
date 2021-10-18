@@ -1,7 +1,7 @@
 import axios from 'axios';
 axios.defaults.adapter = require('axios/lib/adapters/http'); 
-const API_PORT = process.env.API_PORT || '8901';
-const API_HOST = process.env.API_HOST || 'http://localhost';
+const API_PORT = process.env.VUE_APP_API_PORT || '8901';
+const API_HOST = process.env.VUE_APP_API_HOST || 'http://localhost';
 
 export default class TodoClient {
   constructor(port, host = 'http://localhost') {
