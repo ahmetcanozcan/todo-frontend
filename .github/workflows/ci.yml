@@ -6,9 +6,9 @@ on:
 name: Test
 jobs:
   test:
-    runs-on: 'ubuntu-latest'
+    runs-on: "ubuntu-latest"
     steps:
-     - name: Checkout code
+      - name: Checkout code
         uses: actions/checkout@v2
       - name: Install Node
         uses: actions/setup-node@v2
@@ -16,10 +16,10 @@ jobs:
         run: |
           npm run test:unit
           npm run test:contract
-      - name: 'Deploy to Heroku'
+      - name: "Deploy to Heroku"
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
-          heroku_email: 'ahmetcanozcan7@gmail.com'
+          heroku_email: "ahmetcanozcan7@gmail.com"
           usedocker: true
