@@ -1,20 +1,20 @@
-FROM node:lts-alpine
+# build stage
+FROM node:lts-alpine as build-stage
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
 
-RUN npm install -g http-server
+# production stage
+FROM node:lts-alpine as production-stage
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY ./server.js .
 
-RUN npm install
+RUN npm install express morgan
 
-COPY . .
+COPY --from=build-stage /app/dist /app/dist
 
-RUN npm run build
-
-ARG PORT=8081
-ENV PORT=$PORT
-
-EXPOSE $PORT
-
-CMD [ "sh", "-c", "http-server", "dist", "-p", "${PORT}"]
+CMD ["node", "server.js"]
