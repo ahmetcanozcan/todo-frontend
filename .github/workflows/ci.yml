@@ -24,7 +24,24 @@ jobs:
         run: |
           npm run test:unit
           npm run test:contract
-      - name: "Deploy to Heroku"
+      - name: "Deploy to dev environment"
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_DEV_APP_NAME}}
+          heroku_email: "ahmetcanozcan7@gmail.com"
+          usedocker: true
+          docker_build_args: |
+            API_PORT
+            API_HOST
+        env:
+          API_PORT: ${{ secrets.DEV_API_HOST }}
+          API_HOST: ${{ secrets.API_PORT }}
+      - name: "Run acceptance tests"
+        run: "npm run test:acceptance"
+        env:
+          APP_DEV_URL: ${{ secrets.APP_DEV_URL }}
+      - name: "Deploy to production"
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
