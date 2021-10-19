@@ -1,19 +1,10 @@
 import { Selector, fixture, test } from 'testcafe';
 
-const mockServer = require('../../mock-server');
 
-const url = 'http://localhost:8080/';
+const url = process.env.APP_DEV_URL || 'http://localhost:8080/';
 
-const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 fixture`Todo list`.page`${url}`
-  .before(async () => {
-    await wait(1000);
-    await mockServer.start();
-  })
-  .after(async () => {
-    await mockServer.stop();
-  });
 
 test('should add a todo', async (t) => {
   const testInput = 'buy some milk';
