@@ -21,7 +21,8 @@ npm run lint
 ```
 ## Deployment
 
-Deployment is automated using GitHub actions. whenever a push comes to the `master` branch, It triggers a GitHub action. that action build project a container and runs all tests. if tests are not failed, Create a docker image and deploy this image into the Heroku container registry, after that Heroku deploys this image as a running container
+Deployment is automated using GitHub actions. whenever a push comes to the `master` branch, It triggers a GitHub action. that action build project a container and runs unit and contract tests. if tests are not failed, Deploy the application to dev environment in several steps: Create a docker image and deploy this image into the Heroku container registry, after that Heroku deploys this image as a running container. After that acceptance test will be running, if the application pass the test. Application will be deployed to production
+
 
 
 ## Development Process
